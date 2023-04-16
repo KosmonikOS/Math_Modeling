@@ -4,8 +4,9 @@ class TwoEdgeManipulatorForPlane:
         self.r1 = r1
         self.r2 = r2
     def findAngles(self,destX,destY):
-        if (destX ** 2 + destY ** 2) ** 0.5 > self.r1 + self.r2:
-            return []
+        distance = (destX ** 2 + destY ** 2) ** 0.5
+        if(distance > self.r1 + self.r2
+           or distance < max(self.r1,self.r2) - min(self.r1,self.r2)): return []
         φ1,φ2 = sy.symbols('φ1, φ2')
         equationX = self.r1 * sy.cos(φ1) + self.r2 * sy.cos(φ1 + φ2) - destX
         equationY = self.r1 * sy.sin(φ1) + self.r2 * sy.sin(φ1 + φ2) - destY

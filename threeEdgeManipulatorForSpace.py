@@ -6,7 +6,6 @@ class ThreeEdgeManipulatorForSpace:
         self.r2 = r2
         self.r3 = r3
     def findAngles(self,destX,destY,destZ):
-        if (destX ** 2 + destY ** 2 + destZ ** 2) ** 0.5 > self.r1 + self.r2 + self.r3: return []
         φ1 = np.arctan(destX / destY) if destY != 0 else 0
         φ2,φ3 = sy.symbols('φ2, φ3')
         equation1 = self.r2 * np.cos(φ1) * sy.cos(φ2) + self.r3 * np.cos(φ1) * sy.cos(φ2 + φ3) - (destX - self.r1 * np.cos(φ1))
