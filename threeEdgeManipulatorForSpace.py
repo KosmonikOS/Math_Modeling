@@ -6,6 +6,9 @@ class ThreeEdgeManipulatorForSpace:
         self.r2 = r2
         self.r3 = r3
     def findAngles(self,destX,destY,destZ):
+        if np.sqrt(destX ** 2 + destY ** 2 + destZ ** 2) > (self.r1 + self.r2 + self.r3):
+            print('End-effecter is outside the workspace')
+            return [None, None, None]
         if destY != 0:
             φ1 = np.arctan(destX / destY)
         else:
@@ -17,6 +20,8 @@ class ThreeEdgeManipulatorForSpace:
         if len(result) == 0: return []
         return [φ1, result[0][0], result[1][0]]
     def findPosition(self, φ1, φ2, φ3):
+        if φ1 == None:
+            return
         x3 = (self.r1 + self.r2*sy.cos(φ2) + self.r3*sy.cos(φ2 + φ3))*sy.cos(φ1)
         y3 = (self.r1 + self.r2*sy.cos(φ2) + self.r3*sy.cos(φ2 + φ3))*sy.sin(φ1)
         z3 = self.r2*sy.sin(φ2) + self.r3*sy.sin(φ2 + φ3)
