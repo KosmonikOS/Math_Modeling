@@ -1,12 +1,11 @@
 import numpy as np
-import sympy as sy
 import matplotlib.pyplot as plt
 class ThreeEdgeManipulatorForSpace:
-    def __init__(self,r1,r2,r3):
-        self.L12 = r1
-        self.L23 = r2
-        self.L34 = r3
-    def findAngles(self,destX,destY,destZ):
+    def __init__(self,L12, L23,L34):
+        self.L12 = L12
+        self.L23 = L23
+        self.L34 = L34
+    def solveInversedKinematics(self,destX,destY,destZ):
         if np.sqrt(destX ** 2 + destY ** 2 + destZ ** 2) > (self.L12 + self.L23 + self.L34):
             print('End-effecter is outside the workspace')
             return
@@ -48,9 +47,9 @@ class ThreeEdgeManipulatorForSpace:
         ax.plot([x3a, destX], [y3a,destY],[z3a,destZ], 'b')
         ax.plot([x2,x3b],[y2,y3b],[0,z3b],'g', linestyle='--')
         ax.plot([x3b, destX], [y3b,destY],[z3b,destZ],'g', linestyle='--')
-        plt.plot([x2], [y2], 'bo')
-        plt.plot([x3a], [y3a],[z3a],'bo')
-        plt.plot([x3b], [y3b],[z3b],'go')
+        ax.plot([x2], [y2], 'bo')
+        ax.plot([x3a], [y3a],[z3a],'bo')
+        ax.plot([x3b], [y3b],[z3b],'go')
         ax.plot([0], [0], 'ro')
         ax.plot([destX], [destY],[destZ], 'ro')
         ax.set_xlabel('X Label')
@@ -58,9 +57,3 @@ class ThreeEdgeManipulatorForSpace:
         ax.set_zlabel('Z Label')
         plt.title('Inverse Kinematics 3-Links Spatial Manipulator')
         plt.show()
-
-    def findPosition(self, φ1, φ2, φ3):
-        x3 = (self.L12 + self.L23*sy.cos(φ2) + self.L34*sy.cos(φ2 + φ3))*sy.cos(φ1)
-        y3 = (self.L12 + self.L23*sy.cos(φ2) + self.L34*sy.cos(φ2 + φ3))*sy.sin(φ1)
-        z3 = self.L23*sy.sin(φ2) + self.L34*sy.sin(φ2 + φ3)
-        return np.array([x3, y3, z3])
