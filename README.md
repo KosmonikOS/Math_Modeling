@@ -21,7 +21,6 @@ This manipulator consists of three links connected by revolute joints in a spati
 The following packages are required to run the solver:
 
 - NumPy
-- SymPy
 - Matplotlib
 
 ## Sources
