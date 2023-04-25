@@ -4,10 +4,6 @@ This project is a Python implementation of the inverse kinematics solver for man
 
 ## Implemented Manipulators
 
-### 2-Links Planar Manipulator
-
-This manipulator consists of two links connected by revolute joints in a planar configuration.
-
 ### 3-Links Planar Manipulator
 
 This manipulator consists of three links connected by revolute joints in a planar configuration.
